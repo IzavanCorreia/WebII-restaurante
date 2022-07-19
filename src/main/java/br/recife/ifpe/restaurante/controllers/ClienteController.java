@@ -80,7 +80,11 @@ public class ClienteController {
 	}	
 	
 	@RequestMapping("/cliente/pedidohelp")
-	public String fazPedido(Model m) {
+	public String fazPedido(Model m, Prato c) {
+		
+		Pedido p = new Pedido();
+		p.setPrato(Facade.getCurrentInstance().readPrato(c.getId()));
+		System.out.println(c.getId());
 		
 		List <Pagamento> pagamentos = Facade.getCurrentInstance().readAllPagamento();
 		m.addAttribute("pagamento", pagamentos);
@@ -91,30 +95,39 @@ public class ClienteController {
 		List <Cliente> clientes = Facade.getCurrentInstance().readAllCliente();
 		m.addAttribute("cliente", clientes);
 		
+		m.addAttribute("pedido", p);
 		
 	return "cliente/pedido";
 	}
 	
 	@RequestMapping("/cliente/pedido")
-	public String helpPedido(Model m) {
+	public String helpPedido(Model m, Pedido p) {
+		
+		m.addAttribute("pedido", p);
 		
 	return "cliente/cadastroPedidos";
 	}
 	
 	@RequestMapping("/cliente/cadastroPedidos")
-	public String fazPedido(Model m, Pedido p, Pagamento x, Prato c) {
+	public String fazPedido(Model m, Pedido p, Pagamento x, Prato c, int id2) {
 		
-		p.setPrato(Facade.getCurrentInstance().readPrato(c.getId()));
+		p.setPrato(Facade.getCurrentInstance().readPrato(id2));
 		p.setPagamento(Facade.getCurrentInstance().readPagamento(x.getId()));
 		Facade.getCurrentInstance().create(p);
 		m.addAttribute("msg6","Pedido realizado sucesso!");
+		
+		List <Pedido> pedidos = Facade.getCurrentInstance().readAllPedido();
+		m.addAttribute("pedido", pedidos);
 		
 	return "cliente/visualizarPedidos";
 	}	
 	
 	@RequestMapping("/cliente/visualizarPedidos")
 	public String visualizarPedidos(Model m) {
-
+		
+		List <Pedido> pedidos = Facade.getCurrentInstance().readAllPedido();
+		m.addAttribute("pedido", pedidos);
+		
 	return "cliente/visualizarPedidos";
 	}	
 	

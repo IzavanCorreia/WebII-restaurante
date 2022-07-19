@@ -21,17 +21,16 @@ public final class PedidoRepository implements GenericRepository<Pedido, Integer
 	
 	@Override
 	public void create(Pedido t) {
-		String sql = "insert into pedido(preco, observacao, descricao, prato"
-                + ") values (?,?,?,?)";
+		String sql = "insert into pedido(observacao, id_pagamento, id_prato"
+                + ") values (?,?,?)";
         
         try {
             PreparedStatement pstm = br.recife.ifpe.restaurante.dao.ConnectionManager.getCurrentConnection()
                     .prepareStatement(sql);
             
-            pstm.setDouble(1, t.getPreco());
-            pstm.setString(2, t.getObservacao());
-            pstm.setString(3, t.getPagamento().getDescricao());
-            pstm.setString(4, t.getPrato().getDescricao());
+            pstm.setString(1, t.getObservacao());
+            pstm.setInt(2, t.getPagamento().getId());
+            pstm.setInt(3, t.getPrato().getId());
           
             pstm.execute();
             
@@ -45,8 +44,7 @@ public final class PedidoRepository implements GenericRepository<Pedido, Integer
 
 	@Override
 	public void update(Pedido t) {
-		String sql = "update pedido set preco = ?, "
-                + "observacao = ? where id = ? ";
+		String sql = "update pedido set observacao = ? where id = ? ";
         
         try {
             PreparedStatement pstm = br.recife.ifpe.restaurante.dao.ConnectionManager.getCurrentConnection()
@@ -162,22 +160,23 @@ public final class PedidoRepository implements GenericRepository<Pedido, Integer
                 Pedido v = new Pedido();
                 
                 v.setId(r.getInt("id"));
-                v.setDatahora(r.getLong("datahora"));
-                v.setPreco(r.getDouble("preco"));
+                v.setDatahora(r.getLong("datahora"));          
                 v.setObservacao(r.getString("observacao"));
    
                 ClienteRepository cliente = new ClienteRepository();           
-                Cliente c = cliente.read(r.getString("cpf_cliente"));            
+                Cliente c = cliente.read(r.getString("id_cliente"));            
                 v.setCliente(c);
+                
+
+                PagamentoRepository pagamento = new PagamentoRepository();
+                Pagamento p = pagamento.read(r.getInt("id_pagamento")); 
+                v.setPagamento(p);
                 
 
                 PratoRepository prato = new PratoRepository();
                 Prato m = prato.read(r.getInt("id_prato")); 
                 v.setPrato(m);
                 
-                PagamentoRepository pagamento = new PagamentoRepository();
-                Pagamento p = pagamento.read(r.getInt("id_pagamento")); 
-                v.setPagamento(p);
                          
                 pedidos.add(v);
                 

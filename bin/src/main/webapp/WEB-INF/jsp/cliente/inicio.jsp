@@ -17,22 +17,22 @@
 <form method="post" action="/cliente/pedidohelp">
 	<table class="w3-table w3-striped" border="1">
 		
-		<tr><th>Nome</th><th>Descricao</th><th>Preco</th><th>Selecionar</th><th>Operacoes</th></tr>
+		<tr><th>Nome</th><th>Descricao</th><th>preco</th><th>operacoes<th></tr>
 	
 		<c:forEach items="${prato}" var="item">
 			<tr>
 				<td>${item.nome}</td>
 				<td>${item.descricao}</td>
 				<td>${item.preco}</td>
-				<td><input type = "radio" name ="id" value = "${item.id}"/></td>
-				<td><input type = "submit" value = "confirmar"/></td>
+				<td><input type = "submit" name ="id" value = "${item.id}"/></td>
 				
 			</tr>
 		</c:forEach>
 		
 	</table>
 </form>
-	<a href="/cliente/visualizarPedidos"><input type="button" value="Meus Pedidos"></a>
+	
+<a href = "/cliente/visualizarPedidos"><input type = "submit" value= "Meus Pedidos"/></a>
 	
 </body>
 </html>

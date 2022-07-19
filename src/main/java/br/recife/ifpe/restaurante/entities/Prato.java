@@ -4,7 +4,7 @@ public class Prato {
 
 	private int id;
 	private String nome;
-	private String Descricao;
+	private String descricao;
 	private double preco;
 	
 	public int getId() {
@@ -20,10 +20,10 @@ public class Prato {
 		this.nome = nome;
 	}
 	public String getDescricao() {
-		return Descricao;
+		return descricao;
 	}
 	public void setDescricao(String descricao) {
-		Descricao = descricao;
+		this.descricao = descricao;
 	}
 	public double getPreco() {
 		return preco;

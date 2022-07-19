@@ -24,7 +24,7 @@
 		</c:forEach>
 	</table>
 		Observacao: <input type="text" name="observacao"/>	
-		<button type = "submit" name = "id2" value="${pedido.prato.id}">Fazer Pedido</button>
+		<input type = "submit" value="Confirmar Pedido"/>
 	</form>
 	
 </body>
