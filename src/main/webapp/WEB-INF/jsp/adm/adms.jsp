@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 </head>
@@ -11,7 +12,7 @@
 <h1>Administradores cadastrados</h1>
 	<a href = "/">home</a>
 	
-	<table border="1">
+	<table class="w3-table w3-striped" border="1">
 		
 		<tr><th>Nome</th><th>Telefone</th><th>E-mail</th><th>operacoes<th></tr>
 	

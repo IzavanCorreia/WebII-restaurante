@@ -21,20 +21,18 @@ public final class PedidoRepository implements GenericRepository<Pedido, Integer
 	
 	@Override
 	public void create(Pedido t) {
-		String sql = "insert into pedido(datahora, preco, observacao,"
-                + "id_cliente, id_prato, id_pagamento) values (?,?,?,?,?,?)";
+		String sql = "insert into pedido(preco, observacao, descricao, prato"
+                + ") values (?,?,?,?)";
         
         try {
             PreparedStatement pstm = br.recife.ifpe.restaurante.dao.ConnectionManager.getCurrentConnection()
                     .prepareStatement(sql);
             
-            pstm.setLong(1, t.getDatahora());
-            pstm.setDouble(2, t.getPreco());
-            pstm.setString(3, t.getObservacao());
-            pstm.setString(4, t.getCliente().getCpf());
-            pstm.setInt(5, t.getPrato().getId());
-            pstm.setInt(6, t.getPagamento().getId());
-      
+            pstm.setDouble(1, t.getPreco());
+            pstm.setString(2, t.getObservacao());
+            pstm.setString(3, t.getPagamento().getDescricao());
+            pstm.setString(4, t.getPrato().getDescricao());
+          
             pstm.execute();
             
         } catch (SQLException ex) {
@@ -47,7 +45,7 @@ public final class PedidoRepository implements GenericRepository<Pedido, Integer
 
 	@Override
 	public void update(Pedido t) {
-		String sql = "update pedido set datahora = ?, preco = ?, "
+		String sql = "update pedido set preco = ?, "
                 + "observacao = ? where id = ? ";
         
         try {

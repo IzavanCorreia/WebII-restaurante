@@ -102,6 +102,7 @@ public class AdmController {
 		
 		List<Cliente> cliente1 = Facade.getCurrentInstance().readAllCliente();
 		
+		
 		m.addAttribute("cliente", cliente1);
 		
 		return "adm/visualizarClientes";

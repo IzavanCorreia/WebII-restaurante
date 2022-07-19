@@ -8,7 +8,7 @@
 </head>
 <body>
 <h1>${msg2}</h1>
-<h1>Menu de ajustes</h1>
+<h1>Painel Administrativo</h1>
 	<a href="/">Inicio</a><br>
 	<a href = "/adm/telaAdms">Visualizar administradores cadastrados</a><br>
 	<a href = "/adm/telaPratos">Cadastrar pratos</a><br>
