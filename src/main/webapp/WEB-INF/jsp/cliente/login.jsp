@@ -15,7 +15,7 @@
 		E-mail: <input type="text" name="email"/>
 		Senha: <input type="password" name="senha"/>
 		
-		<input type = "submit" value="Entrar"/><br>
+		<button type = "submit" name="idcliente">Entrar</button><br>
 	
 		<h1>${msg3}</h1>
 	

@@ -47,6 +47,8 @@ public class ClienteController {
 	
 	@RequestMapping("/cliente/telaLogin")
 	public String telaLogin(Model m) {
+		
+		
 		return "cliente/login";
 	}
 	
@@ -54,10 +56,14 @@ public class ClienteController {
 	@RequestMapping("/cliente/login")
 	public String login (Model m, String email, String senha) {
 	
-	Cliente teste = ClienteRepository.Login(email, senha);
+		Cliente teste = new Cliente();
+	    teste = ClienteRepository.Login(email, senha);
 	
 	if(teste != null) {	
 		m.addAttribute("msg2","Login com sucesso!");
+		
+		List<Cliente> clientes = Facade.getCurrentInstance().readAllCliente();
+		m.addAttribute("cliente", clientes);
 		
 		List<Prato> pratos = Facade.getCurrentInstance().readAllPrato();
 		m.addAttribute("prato", pratos);
@@ -73,7 +79,8 @@ public class ClienteController {
 }		
 	
 	@RequestMapping("/cliente/inicio")
-	public String telaSelecionaPrato(Model m) {
+	public String telaSelecionaPrato(Model m, Cliente clientes) {
+		
 			
 		return "cliente/pedido";
 		
@@ -84,7 +91,6 @@ public class ClienteController {
 		
 		Pedido p = new Pedido();
 		p.setPrato(Facade.getCurrentInstance().readPrato(c.getId()));
-		System.out.println(c.getId());
 		
 		List <Pagamento> pagamentos = Facade.getCurrentInstance().readAllPagamento();
 		m.addAttribute("pagamento", pagamentos);
@@ -110,6 +116,7 @@ public class ClienteController {
 	
 	@RequestMapping("/cliente/cadastroPedidos")
 	public String fazPedido(Model m, Pedido p, Pagamento x, Prato c, int id2) {
+		
 		
 		p.setPrato(Facade.getCurrentInstance().readPrato(id2));
 		p.setPagamento(Facade.getCurrentInstance().readPagamento(x.getId()));

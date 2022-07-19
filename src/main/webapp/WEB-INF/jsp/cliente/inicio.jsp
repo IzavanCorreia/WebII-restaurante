@@ -14,6 +14,7 @@
 <h1>Menu do restaurante</h1>
 	<h1>Pratos cadastrados</h1>
 
+
 <form method="post" action="/cliente/pedidohelp">
 	<table class="w3-table w3-striped" border="1">
 		
